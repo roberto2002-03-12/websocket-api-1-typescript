@@ -2,9 +2,11 @@ import mongoose from 'mongoose';
 import config from './index';
 import createHttpError from 'http-errors';
 
-const CONNECTION_URL: string = `mongodb://${config.dbMongo.user}:${config.dbMongo.password}@${config.dbMongo.url}/${config.dbMongo.name}`;
+const CONNECTION_URL: string = `mongodb://${config.dbMongo.user}:${config.dbMongo.password}@${config.dbMongo.url}`;
 
-mongoose.connect(CONNECTION_URL)
+mongoose.connect(CONNECTION_URL, {
+    dbName: config.dbMongo.databaseName // no puedes declarar el nombre de la bd en la url
+  })
   .catch(error => {
   throw createHttpError(500, 'Error on database connection, contact support ', error);
 });

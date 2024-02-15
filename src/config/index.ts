@@ -1,11 +1,13 @@
+require('dotenv').config();
+
 const config = {
   dbMongo: {
-    url: 'localhost:27017',
-    name: 'chatdb',
-    user: 'root',
-    password: 'password'
+    url: process.env.DATABASE_URL as string,
+    databaseName: process.env.DATABASE_NAME as string,
+    user: process.env.DATABASE_USERNAME as string,
+    password: process.env.DATABASE_PASSWORD as string
   },
-
+  jwtSignKey: process.env.JWT_SIGN_KEY as string
 }
 
 export default config;
